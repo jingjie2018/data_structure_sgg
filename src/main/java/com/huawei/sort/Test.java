@@ -21,7 +21,9 @@ public class Test {
 //        SelectSort.selectSort(arr);
 //        InsertSort.insertSort2 (arr);
 //        ShellSort.shellSort(arr);
-        QuickSort.quickSort(arr, 0, arr.length - 1);
+//        QuickSort.quickSort(arr, 0, arr.length - 1);
+//        MergeSort.mergeSort(arr, 0, arr.length - 1, new int[arr.length]);
+        RadixSort.radixSort(arr);
         System.out.println(Arrays.toString(arr));
 
         LocalDateTime dateTime2 = LocalDateTime.now();
