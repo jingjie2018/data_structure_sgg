@@ -1,4 +1,4 @@
-package com.iss.huffmantree;
+package com.iss.tree.huffmantree;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.List;
 public class HuffmanTree {
 
 	public static void main(String[] args) {
-		int arr[] = { 13, 7, 8, 3, 29, 6, 1 };
+		int[] arr = { 13, 7, 8, 3, 29, 6, 1 };
 		Node root = createHuffmanTree(arr);
 		//测试一把
 		preOrder(root);
@@ -33,16 +33,13 @@ public class HuffmanTree {
 		// 1. 遍历 arr 数组
 		// 2. 将arr的每个元素构成成一个Node
 		// 3. 将Node 放入到ArrayList中
-		List<Node> nodes = new ArrayList<Node>();
+		List<Node> nodes = new ArrayList<>();
 		for (int value : arr) {
 			nodes.add(new Node(value));
 		}
 
 		//我们处理的过程是一个循环的过程
-
-
 		while(nodes.size() > 1) {
-
 			//排序 从小到大
 			Collections.sort(nodes);
 
@@ -65,10 +62,8 @@ public class HuffmanTree {
 			//(5)将parent加入到nodes
 			nodes.add(parent);
 		}
-
 		//返回哈夫曼树的root结点
 		return nodes.get(0);
-
 	}
 }
 
@@ -106,5 +101,4 @@ class Node implements Comparable<Node> {
 		// 表示从小到大排序
 		return this.value - o.value;
 	}
-
 }
