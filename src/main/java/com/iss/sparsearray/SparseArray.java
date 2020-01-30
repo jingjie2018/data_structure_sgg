@@ -43,6 +43,7 @@ public class SparseArray {
             e.printStackTrace();
         }
         // 3.将稀疏数组恢复成原始的二维数组
+        assert sparseArr != null;
         int rowLen = sparseArr[0][0];
         int colLen = sparseArr[0][1];
         int[][] chessArr2 = new int[rowLen][colLen];
