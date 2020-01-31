@@ -14,6 +14,18 @@ import java.util.Map;
 
 public class HuffmanCode {
 
+    //生成赫夫曼树对应的赫夫曼编码
+    //思路:
+    //1. 将赫夫曼编码表存放在 Map<Byte,String> 形式
+    //   生成的赫夫曼编码表{32=01, 97=100, 100=11000, 117=11001, 101=1110, 118=11011, 105=101, 121=11010, 106=0010, 107=1111, 108=000, 111=0011}
+    static Map<Byte, String> huffmanCodes = new HashMap<Byte, String>();
+
+    //编写一个方法，完成对压缩文件的解压
+    //2. 在生成赫夫曼编码表示，需要去拼接路径, 定义一个StringBuilder 存储某个叶子结点的路径
+    static StringBuilder stringBuilder = new StringBuilder();
+
+    //编写方法，将一个文件进行压缩
+
     public static void main(String[] args) {
 
         //测试压缩文件
@@ -72,7 +84,14 @@ public class HuffmanCode {
 
     }
 
-    //编写一个方法，完成对压缩文件的解压
+    //完成数据的解压
+    //思路
+    //1. 将huffmanCodeBytes [-88, -65, -56, -65, -56, -65, -55, 77, -57, 6, -24, -14, -117, -4, -60, -90, 28]
+    //   重写先转成 赫夫曼编码对应的二进制的字符串 "1010100010111..."
+    //2.  赫夫曼编码对应的二进制的字符串 "1010100010111..." =》 对照 赫夫曼编码  =》 "i like like like java do you like a java"
+
+
+    //编写一个方法，完成对压缩数据的解码
 
     /**
      * @param zipFile 准备解压的文件
@@ -117,8 +136,6 @@ public class HuffmanCode {
         }
     }
 
-    //编写方法，将一个文件进行压缩
-
     /**
      * @param srcFile 你传入的希望压缩的文件的全路径
      * @param dstFile 我们压缩后将压缩文件放到哪个目录
@@ -154,10 +171,10 @@ public class HuffmanCode {
             System.out.println(e.getMessage());
         } finally {
             try {
-				assert is != null;
-				is.close();
-				assert oos != null;
-				oos.close();
+                assert is != null;
+                is.close();
+                assert oos != null;
+                oos.close();
                 os.close();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -166,14 +183,7 @@ public class HuffmanCode {
 
     }
 
-    //完成数据的解压
-    //思路
-    //1. 将huffmanCodeBytes [-88, -65, -56, -65, -56, -65, -55, 77, -57, 6, -24, -14, -117, -4, -60, -90, 28]
-    //   重写先转成 赫夫曼编码对应的二进制的字符串 "1010100010111..."
-    //2.  赫夫曼编码对应的二进制的字符串 "1010100010111..." =》 对照 赫夫曼编码  =》 "i like like like java do you like a java"
-
-
-    //编写一个方法，完成对压缩数据的解码
+    //使用一个方法，将前面的方法封装起来，便于我们的调用.
 
     /**
      * @param huffmanCodes 赫夫曼编码表 map
@@ -231,6 +241,9 @@ public class HuffmanCode {
 
     }
 
+
+    //编写一个方法，将字符串对应的byte[] 数组，通过生成的赫夫曼编码表，返回一个赫夫曼编码 压缩后的byte[]
+
     /**
      * 将一个byte 转成一个二进制的字符串, 如果看不懂，可以参考我讲的Java基础 二进制的原码，反码，补码
      *
@@ -253,8 +266,6 @@ public class HuffmanCode {
         }
     }
 
-    //使用一个方法，将前面的方法封装起来，便于我们的调用.
-
     /**
      * @param bytes 原始的字符串对应的字节数组
      * @return 是经过 赫夫曼编码处理后的字节数组(压缩后的数组)
@@ -266,11 +277,8 @@ public class HuffmanCode {
         //对应的赫夫曼编码(根据 赫夫曼树)
         Map<Byte, String> huffmanCodes = getCodes(huffmanTreeRoot);
         //根据生成的赫夫曼编码，压缩得到压缩后的赫夫曼编码字节数组
-		return zip(bytes, huffmanCodes);
+        return zip(bytes, huffmanCodes);
     }
-
-
-    //编写一个方法，将字符串对应的byte[] 数组，通过生成的赫夫曼编码表，返回一个赫夫曼编码 压缩后的byte[]
 
     /**
      * @param bytes        这时原始的字符串对应的 byte[]
@@ -319,15 +327,6 @@ public class HuffmanCode {
         }
         return huffmanCodeBytes;
     }
-
-    //生成赫夫曼树对应的赫夫曼编码
-    //思路:
-    //1. 将赫夫曼编码表存放在 Map<Byte,String> 形式
-    //   生成的赫夫曼编码表{32=01, 97=100, 100=11000, 117=11001, 101=1110, 118=11011, 105=101, 121=11010, 106=0010, 107=1111, 108=000, 111=0011}
-    static Map<Byte, String> huffmanCodes = new HashMap<Byte, String>();
-    //2. 在生成赫夫曼编码表示，需要去拼接路径, 定义一个StringBuilder 存储某个叶子结点的路径
-    static StringBuilder stringBuilder = new StringBuilder();
-
 
     //为了调用方便，我们重载 getCodes
     private static Map<Byte, String> getCodes(Node root) {

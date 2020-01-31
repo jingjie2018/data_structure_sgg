@@ -9,7 +9,7 @@ public class InsertValueSearch {
 //			arr[i] = i + 1;
 //		}
 
-        int arr[] = {1, 8, 10, 89, 1000, 1000, 1234};
+        int[] arr = {1, 8, 10, 89, 1000, 1000, 1234};
 
         int index = insertValueSearch(arr, 0, arr.length - 1, 1234);
         //int index = binarySearch(arr, 0, arr.length, 1);

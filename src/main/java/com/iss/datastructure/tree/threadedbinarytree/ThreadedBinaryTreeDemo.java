@@ -207,6 +207,11 @@ class HeroNode {
     private int rightType;
 
 
+    public HeroNode(int no, String name) {
+        this.no = no;
+        this.name = name;
+    }
+
     public int getLeftType() {
         return leftType;
     }
@@ -221,11 +226,6 @@ class HeroNode {
 
     public void setRightType(int rightType) {
         this.rightType = rightType;
-    }
-
-    public HeroNode(int no, String name) {
-        this.no = no;
-        this.name = name;
     }
 
     public int getNo() {

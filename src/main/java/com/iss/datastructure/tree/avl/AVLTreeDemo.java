@@ -103,7 +103,7 @@ class AVLTree {
                     parent.right = null;
                 }
             } else if (targetNode.left != null && targetNode.right != null) { // 删除有两颗子树的节点
-				targetNode.value = delRightTreeMin(targetNode.right);
+                targetNode.value = delRightTreeMin(targetNode.right);
             } else { // 删除只有一颗子树的结点
                 // 如果要删除的结点有左子结点
                 if (targetNode.left != null) {

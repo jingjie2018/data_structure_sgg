@@ -12,6 +12,15 @@ public class Graph {
     //定义给数组boolean[], 记录某个结点是否被访问
 //    private boolean[] isVisited;
 
+    //构造器
+    public Graph(int n) {
+        //初始化矩阵和vertexList
+        edges = new int[n][n];
+        vertexList = new ArrayList<>(n);
+        numOfEdges = 0;
+//        isVisited = new boolean[n];
+    }
+
     public static void main(String[] args) {
         //测试一把图是否创建ok
         int n = 5;  //结点的个数
@@ -54,15 +63,6 @@ public class Graph {
         System.out.println();
         System.out.println("广度优先");
         graph.bfs(); // A->B->C->D-E [1->2->3->4->5->6->7->8]
-    }
-
-    //构造器
-    public Graph(int n) {
-        //初始化矩阵和vertexList
-        edges = new int[n][n];
-        vertexList = new ArrayList<>(n);
-        numOfEdges = 0;
-//        isVisited = new boolean[n];
     }
 
     /**

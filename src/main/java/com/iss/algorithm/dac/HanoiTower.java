@@ -1,14 +1,13 @@
 package com.iss.algorithm.dac;
 
-public class Hanoitower {
+public class HanoiTower {
 
     public static void main(String[] args) {
-        hanoiTower(10, 'A', 'B', 'C');
+        hanoiTower(3, 'A', 'B', 'C');
     }
 
     //汉诺塔的移动的方法
     //使用分治算法
-
     public static void hanoiTower(int num, char a, char b, char c) {
         //如果只有一个盘
         if (num == 1) {
