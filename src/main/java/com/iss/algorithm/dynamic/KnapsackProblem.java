@@ -1,9 +1,10 @@
 package com.iss.algorithm.dynamic;
 
+import java.util.Arrays;
+
 public class KnapsackProblem {
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         int[] w = {1, 4, 3};//物品的重量
         int[] val = {1500, 3000, 2000}; //物品的价值 这里val[i] 就是前面讲的v[i]
         int m = 4; //背包的容量
@@ -20,9 +21,8 @@ public class KnapsackProblem {
         for (int i = 0; i < v.length; i++) {
             v[i][0] = 0; //将第一列设置为0
         }
-        for (int i = 0; i < v[0].length; i++) {
-            v[0][i] = 0; //将第一行设置0
-        }
+        //将第一行设置0
+        Arrays.fill(v[0], 0);
 
 
         //根据前面得到公式来动态规划处理
@@ -44,15 +44,14 @@ public class KnapsackProblem {
                     } else {
                         v[i][j] = v[i - 1][j];
                     }
-
                 }
             }
         }
 
         //输出一下v 看看目前的情况
-        for (int i = 0; i < v.length; i++) {
-            for (int j = 0; j < v[i].length; j++) {
-                System.out.print(v[i][j] + " ");
+        for (int[] ints : v) {
+            for (int anInt : ints) {
+                System.out.print(anInt + " ");
             }
             System.out.println();
         }
@@ -78,7 +77,5 @@ public class KnapsackProblem {
             }
             i--;
         }
-
     }
-
 }

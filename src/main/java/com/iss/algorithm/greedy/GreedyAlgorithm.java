@@ -3,74 +3,74 @@ package com.iss.algorithm.greedy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class GreedyAlgorithm {
 
     public static void main(String[] args) {
         //创建广播电台,放入到Map
-        HashMap<String, HashSet<String>> broadcasts = new HashMap<String, HashSet<String>>();
+        Map<String, Set<String>> broadcasts = new LinkedHashMap<>(8);
         //将各个电台放入到broadcasts
-        HashSet<String> hashSet1 = new HashSet<String>();
-        hashSet1.add("北京");
-        hashSet1.add("上海");
-        hashSet1.add("天津");
+        Set<String> k1 = new HashSet<>();
+        k1.add("北京");
+        k1.add("上海");
+        k1.add("天津");
 
-        HashSet<String> hashSet2 = new HashSet<String>();
-        hashSet2.add("广州");
-        hashSet2.add("北京");
-        hashSet2.add("深圳");
+        Set<String> k2 = new HashSet<>();
+        k2.add("广州");
+        k2.add("北京");
+        k2.add("深圳");
 
-        HashSet<String> hashSet3 = new HashSet<String>();
-        hashSet3.add("成都");
-        hashSet3.add("上海");
-        hashSet3.add("杭州");
+        Set<String> k3 = new HashSet<>();
+        k3.add("成都");
+        k3.add("上海");
+        k3.add("杭州");
 
 
-        HashSet<String> hashSet4 = new HashSet<String>();
-        hashSet4.add("上海");
-        hashSet4.add("天津");
+        Set<String> k4 = new HashSet<>();
+        k4.add("上海");
+        k4.add("天津");
 
-        HashSet<String> hashSet5 = new HashSet<String>();
-        hashSet5.add("杭州");
-        hashSet5.add("大连");
+        Set<String> k5 = new HashSet<>();
+        k5.add("杭州");
+        k5.add("大连");
 
         //加入到map
-        broadcasts.put("K1", hashSet1);
-        broadcasts.put("K2", hashSet2);
-        broadcasts.put("K3", hashSet3);
-        broadcasts.put("K4", hashSet4);
-        broadcasts.put("K5", hashSet5);
+        broadcasts.put("K1", k1);
+        broadcasts.put("K2", k2);
+        broadcasts.put("K3", k3);
+        broadcasts.put("K4", k4);
+        broadcasts.put("K5", k5);
 
         //allAreas 存放所有的地区
-        HashSet<String> allAreas = new HashSet<String>();
-        allAreas.add("北京");
-        allAreas.add("上海");
-        allAreas.add("天津");
-        allAreas.add("广州");
-        allAreas.add("深圳");
-        allAreas.add("成都");
-        allAreas.add("杭州");
-        allAreas.add("大连");
+        HashSet<String> allAreas = new HashSet<>();
+        allAreas.addAll(k1);
+        allAreas.addAll(k2);
+        allAreas.addAll(k3);
+        allAreas.addAll(k4);
+        allAreas.addAll(k5);
 
         //创建ArrayList, 存放选择的电台集合
-        ArrayList<String> selects = new ArrayList<String>();
+        ArrayList<String> selects = new ArrayList<>();
 
         //定义一个临时的集合， 在遍历的过程中，存放遍历过程中的电台覆盖的地区和当前还没有覆盖的地区的交集
-        HashSet<String> tempSet = new HashSet<String>();
+        HashSet<String> tempSet = new HashSet<>();
 
         //定义给maxKey ， 保存在一次遍历过程中，能够覆盖最大未覆盖的地区对应的电台的key
         //如果maxKey 不为null , 则会加入到 selects
-        String maxKey = null;
+        String maxKey;
         while (allAreas.size() != 0) { // 如果allAreas 不为0, 则表示还没有覆盖到所有的地区
             //每进行一次while,需要
             maxKey = null;
-
             //遍历 broadcasts, 取出对应key
-            for (String key : broadcasts.keySet()) {
+            for (Map.Entry<String, Set<String>> entry : broadcasts.entrySet()) {
+                String key = entry.getKey();
                 //每进行一次for
                 tempSet.clear();
                 //当前这个key能够覆盖的地区
-                HashSet<String> areas = broadcasts.get(key);
+                Set<String> areas = entry.getValue();
                 tempSet.addAll(areas);
                 //求出tempSet 和   allAreas 集合的交集, 交集会赋给 tempSet
                 tempSet.retainAll(allAreas);
