@@ -3,7 +3,7 @@ package com.iss.datastructure.sort;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-public class Test {
+public class SortTest {
 
     public static void main(String[] args) {
         int length = 8;

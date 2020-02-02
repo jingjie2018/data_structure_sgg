@@ -4,6 +4,28 @@ import java.util.Arrays;
 
 public class KruskalCase {
 
+    public static void main(String[] args) {
+        char[] vertexs = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+        //克鲁斯卡尔算法的邻接矩阵
+        int[][] matrix = {
+                /*A*//*B*//*C*//*D*//*E*//*F*//*G*/
+                /*A*/ {0, 12, INF, INF, INF, 16, 14},
+                /*B*/ {12, 0, 10, INF, INF, 7, INF},
+                /*C*/ {INF, 10, 0, 3, 5, 6, INF},
+                /*D*/ {INF, INF, 3, 0, 4, INF, INF},
+                /*E*/ {INF, INF, 5, 4, 0, 2, 8},
+                /*F*/ {16, 7, 6, INF, 2, 0, 9},
+                /*G*/ {14, INF, INF, INF, 8, 9, 0}
+        };
+        //大家可以在去测试其它的邻接矩阵，结果都可以得到最小生成树.
+
+        //创建KruskalCase 对象实例
+        KruskalCase kruskalCase = new KruskalCase(vertexs, matrix);
+        //输出构建的
+        kruskalCase.print();
+        kruskalCase.kruskal();
+    }
+
     //使用 INF 表示两个顶点不能连通
     private static final int INF = Integer.MAX_VALUE;
     private int edgeNum; //边的个数
@@ -17,16 +39,12 @@ public class KruskalCase {
 
         //初始化顶点, 复制拷贝的方式
         this.vertexs = new char[vlen];
-        for (int i = 0; i < vertexs.length; i++) {
-            this.vertexs[i] = vertexs[i];
-        }
+        System.arraycopy(vertexs, 0, this.vertexs, 0, vertexs.length);
 
         //初始化边, 使用的是复制拷贝的方式
         this.matrix = new int[vlen][vlen];
         for (int i = 0; i < vlen; i++) {
-            for (int j = 0; j < vlen; j++) {
-                this.matrix[i][j] = matrix[i][j];
-            }
+            System.arraycopy(matrix[i], 0, this.matrix[i], 0, vlen);
         }
         //统计边的条数
         for (int i = 0; i < vlen; i++) {
@@ -36,29 +54,6 @@ public class KruskalCase {
                 }
             }
         }
-
-    }
-
-    public static void main(String[] args) {
-        char[] vertexs = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
-        //克鲁斯卡尔算法的邻接矩阵
-        int[][] matrix = {
-                /*A*//*B*//*C*//*D*//*E*//*F*//*G*/
-                /*A*/ {0, 12, INF, INF, INF, 16, 14},
-                /*B*/ {12, 0, 10, INF, INF, 7, INF},
-                /*C*/ {INF, 10, 0, 3, 5, 6, INF},
-                /*D*/ {INF, INF, 3, 0, 4, INF, INF},
-                /*E*/ {INF, INF, 5, 4, 0, 2, 8},
-                /*F*/ {16, 7, 6, INF, 2, 0, 9},
-                /*G*/ {14, INF, INF, INF, 8, 9, 0}};
-        //大家可以在去测试其它的邻接矩阵，结果都可以得到最小生成树.
-
-        //创建KruskalCase 对象实例
-        KruskalCase kruskalCase = new KruskalCase(vertexs, matrix);
-        //输出构建的
-        kruskalCase.print();
-        kruskalCase.kruskal();
-
     }
 
     public void kruskal() {
@@ -97,8 +92,6 @@ public class KruskalCase {
         for (int i = 0; i < index; i++) {
             System.out.println(rets[i]);
         }
-
-
     }
 
     //打印邻接矩阵
@@ -176,7 +169,6 @@ public class KruskalCase {
         }
         return i;
     }
-
 }
 
 //创建一个类EData ，它的对象实例就表示一条边
@@ -197,6 +189,4 @@ class EData {
     public String toString() {
         return "EData [<" + start + ", " + end + ">= " + weight + "]";
     }
-
-
 }

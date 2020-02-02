@@ -2,7 +2,6 @@ package com.iss.algorithm.horse;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class HorseChessboard {
 
@@ -67,13 +66,12 @@ public class HorseChessboard {
         //说明: step < X * Y  成立的情况有两种
         //1. 棋盘到目前位置,仍然没有走完
         //2. 棋盘处于一个回溯过程
-        if (step < X * Y && !finished) {
+        if (step < X * Y - 1 && !finished) {
             chessboard[row][column] = 0;
             visited[row * X + column] = false;
         } else {
             finished = true;
         }
-
     }
 
     /**
@@ -84,7 +82,7 @@ public class HorseChessboard {
      */
     public static ArrayList<Point> next(Point curPoint) {
         //创建一个ArrayList
-        ArrayList<Point> ps = new ArrayList<Point>();
+        ArrayList<Point> ps = new ArrayList<>();
         //创建一个Point
         Point p1 = new Point();
         //表示马儿可以走5这个位置
